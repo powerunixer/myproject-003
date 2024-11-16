@@ -32,3 +32,15 @@ func (a *App) Handler(w http.ResponseWriter, r *http.Request) {
 	})
 	fmt.Fprintf(w, "Hello World in Handler!\n")
 }
+
+func (a *App) Handler2(w http.ResponseWriter, r *http.Request) {
+	a.log.Log(logging.Entry{
+		Severity: logging.Info,
+		HTTPRequest: &logging.HTTPRequest{
+			Request: r,
+		},
+		Labels:  map[string]string{"arbitraryField": "custom entry"},
+		Payload: "Structured logging example.",
+	})
+	fmt.Fprintf(w, "Hello World in Handler2!\n")
+}
